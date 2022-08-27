@@ -6,7 +6,7 @@ export function login(data) {
   // data.password=shaJs('sha256').update(data.password).digest('hex')
   return request({
     method: "post",
-    url: "/userlogin",
+    url: "/api/login",
     data,
   });
 }

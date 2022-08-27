@@ -31,9 +31,7 @@ let Goods = reactive({
   size:500,
   page:1,
 })
-store.dispatch("CateListSet");
-store.dispatch("setSpecsList",specs)
-store.dispatch("setGoodsList",Goods)
+
 </script>
 
 <style lang="scss" scoped>

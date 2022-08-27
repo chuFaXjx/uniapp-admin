@@ -31,7 +31,7 @@
         </el-form>
         <!-- 滑动验证码-->
         <mi-captcha ref="captcha" :height="38" :radius="6" bgColor="#fff" textColor="#000" :logo="logoImg"
-          @success="captchaSuccess" class="Captcha" />
+          @success="captchasuccess" class="Captcha" />
         <!-- 提交表单 -->
         <el-button type="primary" @click="handleLogin" :loading="btnLoading" class="LoginBtn">{{$t("signIn")}}</el-button>
       </div>
@@ -71,9 +71,9 @@ const loginFormRef = ref(null);
 // 登录的表单数据
 const loginForm = reactive({
   username: "admin",
-  password: "admin888",
-  captchaSuccess: false,
+  password: "123456",
 });
+const captchaSuccess = ref(false)
 
 // 登录按钮的加载loading
 const btnLoading = ref(false);
@@ -87,13 +87,14 @@ const loginRules = reactive({
   ],
 });
 // 滑动验证码校验成功
-function captchaSuccess() {
-  loginForm.captchaSuccess = true;
+function captchasuccess() {
+  captchaSuccess.value = true;
 }
+
 // 点击登录按钮，处理登录
 async function handleLogin() {
   // 滑动验证码校验
-  if (!loginForm.captchaSuccess) {
+  if (!captchaSuccess.value) {
     ElMessage({
       showClose: true,
       message: t("captchaError"),
@@ -108,7 +109,9 @@ async function handleLogin() {
       btnLoading.value = true;
       // 用通过vuex发送网络请求
       const res = await store.dispatch("handleLogin", toRaw(loginForm));
+      console.log(res);
       if (res) {
+        // console.log(router);
         router.push({ path: "/" });
         ElMessage({
         showClose: true,
