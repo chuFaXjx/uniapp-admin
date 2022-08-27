@@ -14,7 +14,7 @@ service.interceptors.request.use(
   function (config) {
     // console.log("请求拦截器", config);
     // 在发送请求之前给 header 设置 token
-    if (!config.url.includes('/userlogin')) {
+    if (!config.url.includes('/api/login')) {
      config.headers.authorization = localStorage.getItem("VUE_ADMIN_TOKEN")
     }
     return config;
@@ -28,17 +28,20 @@ service.interceptors.request.use(
 // 添加响应拦截器
 service.interceptors.response.use(
   (response) => {
+    console.log(response);
+    // console.log(response);
     // console.log("response：", response);
     // 如果code不是200,就是失败了
     if (response.data.code !== 200) {
       ElMessage({
         showClose: true,
-        message: response.data.msg,
+        message: response.data.massage,
         type: "error",
       });
-      return Promise.reject(response.data.msg);
+      return Promise.reject(response.data.massage);
     } else {
-      return response.data;
+      console.log(response);
+      return response.data.data;
     }
   },
   (err) => Promise.reject(err)

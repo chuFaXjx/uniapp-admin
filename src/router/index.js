@@ -20,6 +20,15 @@ const routes = [
           breadcrumb:["首页"],
         },
       },
+      { 
+        path:"/user",
+        name:"user",
+        component:()=>import(/* webpackChunkName: "user" */ "@/views/user.vue"),
+        meta:{
+          title:"角色管理",
+          breadcrumb:["角色管理"],
+        },
+      },
     ],
   },
   {
@@ -52,12 +61,6 @@ router.beforeEach((to, from, next) => {
       // 返回到登录页
       next({ name: "login" });
     } else {
-      // 说明用户登陆过了
-      // 判断当前用户是否加载权限路由了,如果没有加载权限路由,则重新加载
-      if(!store.state.userStore.alreadLoad){
-        store.dispatch("addAsyncRoute");
-        router.push(to.fullPath);
-      }
       next();
     }
   } else {

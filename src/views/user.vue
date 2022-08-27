@@ -1,11 +1,12 @@
 <template>
     <div>
-        <MenuAdmin /> 
+        <UserAdmin />    
     </div>
 </template>
 
 <script setup>
-    import MenuAdmin from '@/components/MenuSet/MenuAdmin.vue'
+import UserAdmin from '@/components/userAdmin/userAdmin.vue';
+    
 </script>
 
 <style lang="scss" scoped>

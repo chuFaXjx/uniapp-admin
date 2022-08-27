@@ -46,9 +46,6 @@ import {reactive,watch,ref} from "vue";
 import router from "@/router";
 import { useStore } from 'vuex';
 const store = useStore();
-store.dispatch("setGoodsListTotal");
-store.dispatch("setSpecsListTotal");
-store.dispatch("setAdminListTotal")
 // 标签页
 let tags = reactive([]);
 const route = useRoute();
