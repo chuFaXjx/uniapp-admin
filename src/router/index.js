@@ -20,6 +20,37 @@ const routes = [
           breadcrumb:["首页"],
         },
       },
+      {
+        path: "/picture",
+        name: "picture",
+        component: () =>
+          import(/* webpackChunkName: "picture" */ "@/views/Picture.vue"),
+          meta:{
+            title:"轮播图",
+            breadcrumb:["轮播图管理"],
+          },
+      },
+      {
+        path: "/banneradd",
+        name: "banneradd",
+        component: () =>
+          import(/* webpackChunkName: "picture" */ "@/views/Banneradd.vue"),
+          meta:{
+            title:"轮播图",
+            breadcrumb:["轮播图增加"],
+          },
+      },
+      // banneredit
+      {
+        path: "/banneredit",
+        name: "banneredit",
+        component: () =>
+          import(/* webpackChunkName: "picture" */ "@/views/Banneredit.vue"),
+          meta:{
+            title:"轮播图",
+            breadcrumb:["轮播图增加"],
+          },
+      },
     ],
   },
   {
