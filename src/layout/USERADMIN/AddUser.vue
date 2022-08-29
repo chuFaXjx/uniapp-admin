@@ -8,7 +8,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">Create</el-button>
-      <el-button onclick="onCancel">Cancel</el-button>
+      <el-button @click="onCancel">Cancel</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -23,12 +23,15 @@ let  form = reactive({
   username: '',
   password:""
 })
+let emit = defineEmits(['getAlluser'])
+
 async function AddUser (data){
     await adduser(data)
 }
 // console.log(form);
 const onSubmit = () => {
   AddUser(form)
+  emit.getAlluser;
   store.commit("updataIsclose",false)
 }
 const onCancel = () =>{

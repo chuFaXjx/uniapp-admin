@@ -31,9 +31,11 @@ let props = defineProps({
     RowId: {
         type: Number,
         required: true,
-    }
+    },  
 })
-console.log(props.RowId);
+let emit = defineEmits(['getAlluser'])
+// console.log("1111111111111111111111111111",emit);
+// console.log(props.RowId);
 async function getUserOne() {
     let res = await getuserone(props.RowId);
     form.username = res[0].username
@@ -49,6 +51,7 @@ async function EditUser() {
 // console.log(form);
 const onSubmit = () => {
     EditUser()
+    emit.getAlluser;
     store.commit("updataisEditClose", false)
 }
 const onCancel = () => {

@@ -14,18 +14,18 @@
   </el-table>
 
   <el-dialog v-model="$store.state.userStore.isclose" title="角色管理">
-    <AddUser />
+    <AddUser :getUser="getAlluser()" />
   </el-dialog>
 
-    <el-dialog v-model="$store.state.userStore.isEditClose" title="角色管理" :destroy-on-close=true>
-    <EditUser :RowId = "RowId" />
+  <el-dialog v-model="$store.state.userStore.isEditClose" title="角色管理" :destroy-on-close=true>
+    <EditUser :RowId="RowId" :getUser="getAlluser()" />
   </el-dialog>
 </template>
 
 <script setup>
 import { computed, ref, reactive, watch } from 'vue'
 import { getuserAll, deluser } from "@/api/user"
-import { AddUser,EditUser} from "@/layout/USERADMIN/index"
+import { AddUser, EditUser } from "@/layout/USERADMIN/index"
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -35,6 +35,11 @@ const handleEdit = (id) => {
   store.commit("updataisEditClose", true)
   RowId.value = id;
 }
+
+// 给表格定义
+
+
+
 console.log(RowId);
 // 删除角色功能
 async function deleUser(data) {
@@ -56,6 +61,7 @@ const handleDelete = (id) => {
         message: '删除成功',
       })
       deleUser(id);
+      getAlluser();
     })
     .catch(() => {
       ElMessage({
@@ -65,9 +71,7 @@ const handleDelete = (id) => {
     })
 }
 let tableData = reactive([])
-// watch(()=>tableData,()=>{
-//   console.log(tableData);
-// })
+
 async function getAlluser() {
   let res = await getuserAll();
   // console.log(res);
@@ -78,7 +82,9 @@ const filterTableData = computed(() =>
   tableData.value
 )
 
-
+watch(() => tableData, () => {
+  console.log("1111111111111", tableData);
+})
 
 getAlluser();
 

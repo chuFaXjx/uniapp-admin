@@ -12,7 +12,7 @@ export function login(data) {
 }
 // 获取所有用户
 export function getuserAll() {
-  return request({
+  return request({              
     method: "get",
     url: "/api/getuser",
   });
